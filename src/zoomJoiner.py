@@ -82,7 +82,6 @@ class ZoomJoiner():
     
     
 zoom_joiner = ZoomJoiner("/home/fedmag/Projects/ZoomJoiner/data/timetable.csv")
-# zoom_joiner.join_zoom("https://uni-trier.zoom.us/j/95962868923?pwd=dmRuYm5WVzk3VU5qcDNyZkFUbyswdz09")
 while True:
     zoom_joiner.run()
     time.sleep(59)
