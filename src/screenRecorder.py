@@ -1,5 +1,4 @@
 #%%
-import os
 import subprocess
 import time
 import multiprocessing
@@ -9,7 +8,7 @@ class ScreenRecorder(): # TODO https://ffmpeg.org/ffmpeg-utils.html#time-duratio
     '''
     ffmpeg -f x11grab -s 1920x1080 -i :1.0+0,425  -f alsa -ac 2 -i hw:0  -t '10' out.mkv
     '''
-    def __init__(self, output_filename) -> None:
+    def __init__(self, output_filename) -> None: #TODO add time https://stackoverflow.com/questions/6896490/how-to-set-a-videos-duration-in-ffmpeg
         self.OUT_DIR = "/home/fedmag/Projects/ZoomJoiner/output"
         self.command = "ffmpeg -f x11grab -s 1920x1080 -i :1.0+0,425  -f alsa -ac 2 -i hw:0 -t '10' "+ self.OUT_DIR+"/" +output_filename + ".mkv"
         self.proc = None
@@ -32,4 +31,3 @@ class ScreenRecorder(): # TODO https://ffmpeg.org/ffmpeg-utils.html#time-duratio
 
 # recorder = ScreenRecorder("test")
 # recorder.run()
-# %%
