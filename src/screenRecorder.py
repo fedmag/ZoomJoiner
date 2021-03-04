@@ -57,5 +57,5 @@ class ScreenRecorder(): # TODO https://ffmpeg.org/ffmpeg-utils.html#time-duratio
         # self.increase_volume()
         # print("volume increased")
 
-recorder = ScreenRecorder("try")
-recorder.run()
+# recorder = ScreenRecorder("try")
+# recorder.run()
