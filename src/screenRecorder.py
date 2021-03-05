@@ -3,6 +3,7 @@ import subprocess
 import time
 import multiprocessing
 from configparser import ConfigParser
+import utils
 
 class ScreenRecorder(): # TODO https://ffmpeg.org/ffmpeg-utils.html#time-duration-syntax - exact date possible
 
@@ -17,7 +18,8 @@ class ScreenRecorder(): # TODO https://ffmpeg.org/ffmpeg-utils.html#time-duratio
     def __init__(self, output_filename) -> None: #TODO add time https://stackoverflow.com/questions/6896490/how-to-set-a-videos-duration-in-ffmpeg
         # reading config
         config = ConfigParser()
-        config.read('config.ini')
+        config.read(utils.get_project_dir() +'/config.ini')
+        # print(utils.get_project_dir() +'/config.ini')
         self.OUT_DIR = config['screen_recorder']['output_dir']
         self.duration = config['screen_recorder']['default_duration']
         self.AUDIO_DEVICE = config['screen_recorder']['audio_device']
@@ -26,7 +28,7 @@ class ScreenRecorder(): # TODO https://ffmpeg.org/ffmpeg-utils.html#time-duratio
         self.output_file_path = self.OUT_DIR + "/" + self.file_name + ".mkv"
         # self.proc = None
 
-    def ffmpeg(self):
+    def ffmpeg(self) -> None:
         record_command = f"ffmpeg -f x11grab -s 1920x1080 -i :1.0+0,425  -f pulse -i {self.AUDIO_DEVICE} -t {self.duration} {self.output_file_path}"
         p = subprocess.Popen(record_command, shell=True, stdout=subprocess.PIPE,
                          stderr=subprocess.PIPE)
@@ -44,8 +46,7 @@ class ScreenRecorder(): # TODO https://ffmpeg.org/ffmpeg-utils.html#time-duratio
     #     self.proc.start()
     #     self.proc.terminate()
 
-
-    def run(self):
+    def run(self) -> None:
         print("ffmpeg starts recording..")
         self.ffmpeg()
         # self.proc.start()
@@ -58,4 +59,3 @@ class ScreenRecorder(): # TODO https://ffmpeg.org/ffmpeg-utils.html#time-duratio
         # print("volume increased")
 
 # recorder = ScreenRecorder("try")
-# recorder.run()
